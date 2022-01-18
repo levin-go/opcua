@@ -89,17 +89,29 @@ func (srv *Server) handleCreateSession(ch *serverSecureChannel, requestid uint32
 	}
 	// check endpointurl hostname matches one of the certificate hostnames
 	valid := false
-	if crt, err := x509.ParseCertificate(srv.LocalCertificate()); err == nil {
-		if remoteURL, err := url.Parse(req.EndpointURL); err == nil {
-			hostname := remoteURL.Host
-			i := strings.Index(hostname, ":")
-			if i != -1 {
-				hostname = hostname[:i]
-			}
-			if err := crt.VerifyHostname(hostname); err == nil {
-				valid = true
+	if !srv.allowSecurityPolicyNone {
+		if crt, err := x509.ParseCertificate(srv.LocalCertificate()); err == nil {
+			if remoteURL, err := url.Parse(req.EndpointURL); err == nil {
+				hostname := remoteURL.Host
+				i := strings.Index(hostname, ":")
+				if i != -1 {
+					hostname = hostname[:i]
+				}
+				if err := crt.VerifyHostname(hostname); err == nil {
+					valid = true
+				}
 			}
 		}
+	}else{
+		valid = true
+	}
+	remoteURL, err := url.Parse(req.EndpointURL)
+	if err != nil {
+		valid = false
+	}
+	// can not use vpn ip to connect
+	if strings.Contains(remoteURL.String(), "opc.tcp://10."){
+		valid = false
 	}
 	if !valid {
 		ch.Write(
