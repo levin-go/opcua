@@ -237,7 +237,7 @@ func (srv *Server) handleCreateSession(ch *serverSecureChannel, requestid uint32
 		req.EndpointURL,
 		req.MaxResponseMessageSize,
 	)
-	err := srv.SessionManager().Add(session)
+	err = srv.SessionManager().Add(session)
 	if err != nil {
 		ch.Write(
 			&ua.ServiceFault{
