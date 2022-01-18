@@ -1,0 +1,15 @@
+.DS_Store
+*.env
+*.log
+*.swp
+bin/
+*.csv
+debug
+**/bindata.go
+*~
+vendor/
+__debug_bin
+pki/
+pkiusers/
+*.exe
+.vscode/
