@@ -37,7 +37,7 @@ func NewNamespaceManager(server *Server) *NamespaceManager {
 	return &NamespaceManager{
 		server:         server,
 		namespaces:     []string{"http://opcfoundation.org/UA/", server.LocalDescription().ApplicationURI},
-		nodes:          make(map[ua.NodeID]Node, 4096),
+		nodes:          make(map[ua.NodeID]Node, 2048),
 		variantTypeMap: make(map[ua.NodeID]byte, 32),
 	}
 }

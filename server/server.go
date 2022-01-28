@@ -22,9 +22,9 @@ const (
 	// documents the version of binary protocol that this library supports.
 	protocolVersion uint32 = 0
 	// the default size of the send and recieve buffers.
-	defaultBufferSize uint32 = 64 * 1024
+	defaultBufferSize uint32 = 10 * 1024
 	// the limit on the size of messages that may be accepted.
-	defaultMaxMessageSize uint32 = 16 * 1024 * 1024
+	defaultMaxMessageSize uint32 = 1024 * 1024
 	// defaultMaxChunkCount sets the limit on the number of message chunks that may be accepted.
 	defaultMaxChunkCount uint32 = 4 * 1024
 	// the default number of milliseconds that a session may be unused before being closed by the server. (2 min)
