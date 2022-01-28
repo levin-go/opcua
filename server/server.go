@@ -444,7 +444,7 @@ func (srv *Server) handleCloseSecureChannel(ch *serverSecureChannel, requestid u
 
 func (srv *Server) initializeNamespace() error {
 	nm := srv.NamespaceManager()
-	if err := nm.LoadNodeSetFromBuffer([]byte(nodeset104)); err != nil {
+	if err := nm.LoadNodeSetFromBuffer([]byte(nodeset_sparks)); err != nil {
 		return err
 	}
 	if n, ok := nm.FindVariable(ua.VariableIDServerAuditing); ok {
